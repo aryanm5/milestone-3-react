@@ -29,6 +29,11 @@ function NewMessage(props) {
   const sendMessage = () => {
     var n =  document.getElementById("newName").value;
     var m = document.getElementById("newMessage").value;
+    if(n.length < 1) {
+      alert("Name cannot be empty!"); return;
+    } else if(m.length < 1) {
+      alert("Message cannot be empty!"); return;
+    }
     document.getElementById("newMessage").value = "";
     client.mutate({
       variables: { name: n, message: m },
@@ -45,16 +50,25 @@ function NewMessage(props) {
     .then(result => {  });
   };
 
-  return <div>
-    <input id='newName' placeholder='Name'/><br/>
-    <textarea id='newMessage' placeholder='Message'></textarea><br/>
-    <button onClick={sendMessage}>Send</button>
+  const keyPressed = (e) => {
+    if(e.keyCode == 13) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+
+  return <div className="newMessage">
+    <strong>Milestone 4</strong><br/>
+    By Aryan Mittal<br/><br/>
+    <input id='newName' placeholder='Name'/><br/><br/>
+    <textarea onKeyDown={keyPressed} rows={5} id='newMessage' placeholder='Message'></textarea><br/>
+    <button onClick={sendMessage}>Send Message</button>
   </div>
 }
 function Messages(props) {
   return (
     <div className="messages">
-      {props.messages.map(mess => <div key={mess.id}> {mess.name}: {mess.message} </div>)} 
+      {props.messages.map(mess => <div key={mess.id}><strong>{mess.name}</strong>: {mess.message} </div>)} 
     </div>
   )
 }

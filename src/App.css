@@ -2,8 +2,23 @@
     padding:5vh;
 }
 
+.newMessage {
+    float:left;
+    margin-right:2vw;
+}
+
+button {
+    padding:0.5em;
+    border-radius:3px;
+    cursor:pointer;
+}
+
+input, textarea {
+    width:100%;
+}
+
 .messages {
-    max-height:70vh;
+    max-height:85vh;
     overflow:auto;
     border:1px solid black;
     padding:2vh;
